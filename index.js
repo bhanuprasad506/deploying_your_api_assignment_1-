@@ -1,15 +1,18 @@
-const express = require('express');
-const { resolve } = require('path');
+// Load the dotenv package
+require('dotenv').config();
 
-const app = express();
-const port = 3010;
+// Access environment variables
+const config = {
+  apiKey: process.env.API_KEY,
+  serverSecret: process.env.SERVER_SECRET,
+  isKalvian: process.env.IS_KALVIAN === 'true',
+};
 
-app.use(express.static('static'));
+// Example use case
+function displayConfig() {
+  console.log('API Key:', config.apiKey);
+  console.log('Server Secret:', config.serverSecret);
+  console.log('Is Kalvian:', config.isKalvian);
+}
 
-app.get('/', (req, res) => {
-  res.sendFile(resolve(__dirname, 'pages/index.html'));
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+displayConfig();
